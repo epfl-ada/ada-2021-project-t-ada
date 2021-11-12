@@ -43,7 +43,7 @@ Used libraries (for now): `spaCy`, `NLTK`, `WordCloud`, `Pandas`, `NumPy`, `Matp
 ### Proposed timeline & Organization within the team:
 
 | Task                                                 | Dates                                            | Assigned To
-| -----------------------------------------------------| ------------------------------------------------ | ------------------------------------------------
+| -----------------------------------------------------| :----------------------------------------------: | ------------------------------------------------
 | Homework 2                                           | 12/11 ↓ 26/11                                    | ALL
 | Find/create a dictionary for every topic, use them to filter our data to check if there are enough quotations per topics  | 27/11 ↓ 28/11  |ALBRECHT Alice, JUANICO Alice, TESTA Laura
 | Perform sentiment analysis on the whole data using the different dictionaries, in order to score all the quotes per topic, obtaining a score vector per quotation.   | 27/11 ↓ 30/12 | DESCHAMPS Quentin
