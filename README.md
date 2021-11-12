@@ -71,3 +71,5 @@ Used libraries (for now): `spaCy`, `NLTK`, `WordCloud`, `Pandas`, `NumPy`, `Matp
 - Do you think it is a good idea to train the model on our data set instead of using a pre-trained model or is it unnecessary?
 
 
+### Gantt Chart for the Milestone 3
+![Screenshot](/img/Gantt_Chart_P3.png)
