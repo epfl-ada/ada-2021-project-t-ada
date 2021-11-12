@@ -42,7 +42,7 @@ Used libraries (for now): `spaCy`, `NLTK`, `WordCloud`, `Pandas`, `NumPy`
 
 ### Proposed timeline & Organization within the team:
 
-| Task                                                 | Dates                                            | Who
+| Task                                                 | Dates                                            | Assigned To
 | -----------------------------------------------------| ------------------------------------------------ | ------------------------------------------------
 | Homework 2                                           | 12/11 → 26/11                                    | ALL
 | Find/create a dictionary for every topic, use them to filter our data to check if there are enough quotations per topics  | 27/11 → 28/11  |ALBRECHT Alice, JUANICO Alice, TESTA Laura
