@@ -38,7 +38,7 @@ Further steps to perform for the project:
 - Build a political network: search for the main speakers of the NYT and look at their political party. Link the speakers between them and build a network. 
 - Conclude if one political party is more strongly represented in the NYT, using the political network.
 
-Used libraries: `Spacy`, `NLTK`, `WordCloud`, `Pandas`, `NumPy`
+Used libraries (for now): `Spacy`, `NLTK`, `WordCloud`, `Pandas`, `NumPy`
 
 ### Proposed timeline & Organization within the team:
 
@@ -50,7 +50,7 @@ Used libraries: `Spacy`, `NLTK`, `WordCloud`, `Pandas`, `NumPy`
 | Write the Data Story on the sentimental analysis part, making the mathematical part more visual. | 30/12 → 02/12 | ALBRECHT Alice
 | Perform a PCA to visualize the differences of opinion between Democrats and Republicans (using the sentiment analysis results). | 01/12 → 03/12 | TESTA Laura 
 | Use the entire set of score vectors to determine the opinion (positive, negative, neutral) of the newspaper on each topic. Create visual outputs. | 01/12 → 05/12 | JUANICO Alice
-| For each party, compute from the set of quotations score a mean score vector to determine the opinion (positive, negative, neutral) of the party on each topic. Check if the score distributions are statistically different between both parties (statistical analysis). | 01/12 → 05/12 | JUANICO Alice
+| For each party, compute from the set of quotations scores a mean score vector to determine the opinion (positive, negative, neutral) of the party on each topic. Check if the score distributions are statistically different between both parties (statistical analysis). | 01/12 → 05/12 | JUANICO Alice
 | Compare the opinion of the magazine and political parties to deduce the potential political bias of the NYT. | 05/12 → 07/12 | ALBRECHT Alice
 | Write the Data Story on the topics opinions and conclusions about the NYT. | 07/12 → 08/12 | JUANICO Alice
 | Examine the link between the political speakers to deduce a political network. | 04/12 → 07/12 | DESCHAMPS Quentin, TESTA Laura
