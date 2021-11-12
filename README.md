@@ -38,7 +38,7 @@ Further steps to perform for the project:
 - Build a political network: search for the main speakers of the NYT and look at their political party. Link the speakers between them and build a network. 
 - Conclude if one political party is more strongly represented in the NYT, using the political network.
 
-Used libraries (for now): `spaCy`, `NLTK`, `WordCloud`, `Pandas`, `NumPy`
+Used libraries (for now): `spaCy`, `NLTK`, `WordCloud`, `Pandas`, `NumPy`, `Matplotlib`
 
 ### Proposed timeline & Organization within the team:
 
