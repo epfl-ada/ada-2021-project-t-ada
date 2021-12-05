@@ -1,3 +1,10 @@
+# Python
+__pycache__/
 .ipynb_checkpoints
+
+# MAC
 *.DS_Store
 *.DS_Store?
+
+# Directories
+data/
