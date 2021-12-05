@@ -1,0 +1,7 @@
+gensim
+pandas
+pyLDAvis
+googledrivedownloader
+nltk
+spacy
+tqdm
