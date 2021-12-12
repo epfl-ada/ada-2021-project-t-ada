@@ -4,8 +4,7 @@ Functions to manage parquet files.
 import pandas as pd
 from tqdm import tqdm
 
-
-from .constants import QID, SPEAKER_COLUMNS
+from .constants import QID, QID_COL, SPEAKER_COLUMNS
 
 # Init progress bar
 tqdm.pandas()
@@ -24,6 +23,7 @@ def create_df_from_parquet(
         pd.DataFrame: dataframe.
     """
     df = pd.read_parquet(filename, columns=columns)
+    df.set_index('id', inplace=True)
     return df
 
 
@@ -91,3 +91,19 @@ def create_df_us_party(df: pd.DataFrame) -> pd.DataFrame:
     df_us.party_name = df_us.party_name.astype('category')
 
     return df_us
+
+
+def merge_quotes_speakers(
+    df_quotes: pd.DataFrame,
+    df_speakers: pd.DataFrame,
+) -> pd.DataFrame:
+    """Merges a dataframe of quotes and a dataframe of speakers attributes.
+
+    Args:
+        df_quotes (pd.DataFrame): dataframe of quotes.
+        df_speakers (pd.DataFrame): dataframe of speakers attributes.
+
+    Returns:
+        pd.DataFrame: dataframe merged.
+    """
+    return pd.merge(df_quotes, df_speakers, left_on=QID_COL, right_index=True)
