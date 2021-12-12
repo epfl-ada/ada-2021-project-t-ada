@@ -16,3 +16,6 @@ QID_COL = 'qid'
 QUOTATION_COL = 'quotation'
 SPEAKER_COL = 'speaker'
 TOKENS_COL = 'tokens'
+
+# Useless columns
+USELESS_COLS = ['phase', 'probas']
