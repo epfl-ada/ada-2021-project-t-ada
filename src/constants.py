@@ -20,3 +20,15 @@ TOKENS_COL = 'tokens'
 
 # Useless columns
 USELESS_COLS = ['phase', 'probas']
+
+# Columns to keep in parquet files
+SPEAKER_COLUMNS = [
+    'aliases', 'id', 'nationality', 'US_congress_bio_ID', 'party', 'label'
+]
+
+# Usefull QIDS
+QID = {
+    'us': 'Q30',
+    'democrat': 'Q29552',
+    'republican': 'Q29468',
+}
