@@ -3,6 +3,7 @@ Text processing functions.
 """
 import pandas as pd
 import spacy
+from empath import Empath
 from gensim.corpora import Dictionary
 from gensim.models import LdaMulticore
 from gensim.models.phrases import Phrases
@@ -198,6 +199,27 @@ def get_lda_model(df: pd.DataFrame, dictionary: Dictionary) -> LdaMulticore:
         id2word=dictionary,
         random_state=0
     )
+
+
+def create_vocabulary_with_empath(
+    topic_name: str,
+    seed_words: list,
+    size: int = 500,
+) -> list:
+    """Creates a vocabulary list about a topic using empath.
+
+    Args:
+        topic_name (str): name of the topic.
+        seed_words (list): seed words to generate vocabulary.
+        size (int, optional): number of generated words. Defaults to 500.
+
+    Returns:
+        list: list of words about the topic.
+    """
+    lexicon = Empath()
+    lexicon.create_category(topic_name, seed_words, model='nytimes', size=size)
+    vocabulary = lexicon.cats[topic_name]
+    return vocabulary
 
 
 def get_tfidf_matrix(
