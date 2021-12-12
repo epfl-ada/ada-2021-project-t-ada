@@ -17,3 +17,5 @@ SELECTED_DIR = os.path.join(DATA_DIR, 'selected')
 CNN_DIR = os.path.join(DATA_DIR, 'CNN')
 FOX_DIR = os.path.join(DATA_DIR, 'FOX')
 NYT_DIR = os.path.join(DATA_DIR, 'NYT')
+
+TOKENS_DIR = os.path.join(DATA_DIR, 'tokens')
