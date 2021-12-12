@@ -114,9 +114,36 @@ def add_bigrams(df: pd.DataFrame) -> None:
     )
 
 
-def create_dictionary(df: pd.DataFrame, min_wordcount: int = 5,
-                      max_freq: float = 0.5) -> Dictionary:
-    """Creates a dictionary for Bag-of-words representation.
+def create_dictionary_from_words(
+    words: list,
+    verbose: bool = False,
+) -> Dictionary:
+    """Creates a dictionary from a list of words.
+
+    Args:
+        words (list): list of words.
+        verbose (bool, optional): True to print the dictionary.
+        Defaults to False.
+
+    Returns:
+        Dictionary: Dictionary object.
+    """
+    dictionary = Dictionary(words)
+
+    if verbose:
+        print(dictionary)
+        print('Tokens id:')
+        print(dictionary.token2id)
+
+    return dictionary
+
+
+def create_dictionary_from_tokens_col(
+    df: pd.DataFrame,
+    min_wordcount: int = 5,
+    max_freq: float = 0.5
+) -> Dictionary:
+    """Creates a dictionary from the `tokens` column.
 
     Args:
         df (pd.DataFrame): dataframe with `tokens` column.
