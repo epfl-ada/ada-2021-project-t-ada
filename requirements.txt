@@ -2,6 +2,10 @@ gensim
 pandas
 pyLDAvis
 googledrivedownloader
+matplotlib
 nltk
+pandas
+plotly
 spacy
 tqdm
+wordcloud
