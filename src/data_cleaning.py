@@ -9,21 +9,18 @@ from .constants import USELESS_COLS
 def drop_useless_columns(
     df: pd.DataFrame,
     colnames: list = USELESS_COLS,
-) -> pd.DataFrame:
+) -> None:
     """Drops useless columns from a dataframe of quotes.
 
     Args:
         df (pd.DataFrame): dataframe of quotes.
         colnames (list, optional): names of columns to remove.
         Defaults to USELESS_COLS.
-
-    Returns:
-        pd.DataFrame: dataframe with columns dropped.
     """
-    return df.drop(colnames, axis=1)
+    df.drop(colnames, axis=1, inplace=True)
 
 
-def remove_abnormalities(df: pd.DataFrame) -> pd.DataFrame:
+def remove_abnormalities(df: pd.DataFrame) -> None:
     """Preprocesses and checks any abnormalities in the data:
 
     - Check and remove duplicated rows.
@@ -31,9 +28,6 @@ def remove_abnormalities(df: pd.DataFrame) -> pd.DataFrame:
 
     Args:
         df (pd.DataFrame): dataframe.
-
-    Returns:
-        pd.DataFrame: dataframe with duplicates dropped.
     """
     # Remove duplicated rows
     if not df.index.is_unique:
@@ -44,22 +38,14 @@ def remove_abnormalities(df: pd.DataFrame) -> pd.DataFrame:
     if df.isna().values.any():
         print('Warning: presence of missing entries')
 
-    return df
 
-
-def convert_columns_type(
-    df: pd.DataFrame,
-    verbose: bool = False,
-) -> pd.DataFrame:
+def convert_columns_type(df: pd.DataFrame, verbose: bool = False) -> None:
     """Converts columns types.
 
     Args:
         df (pd.DataFrame): dataframe.
         verbose (bool, optional): True to show old and new types.
         Defaults to False.
-
-    Returns:
-        pd.DataFrame: dataframe with types converted.
     """
     # Print old types
     if verbose:
@@ -76,5 +62,3 @@ def convert_columns_type(
     if verbose:
         print('\nNew types:')
         print(df.dtypes)
-
-    return df
