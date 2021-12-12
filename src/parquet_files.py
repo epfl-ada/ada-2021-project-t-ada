@@ -69,7 +69,7 @@ def create_df_us_party(df: pd.DataFrame) -> pd.DataFrame:
         pd.DataFrame: dataframe with american speakers and their party.
     """
     # Drop non-american speakers and nationality column
-    mask_us = df.nationality.apply(lambda x: QID['us'] in x)
+    mask_us = df.nationality.apply(lambda x: x is not None and QID['us'] in x)
     df_us = df[mask_us]
     df_us = df_us.drop(columns='nationality')
 
