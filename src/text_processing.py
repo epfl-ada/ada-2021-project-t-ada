@@ -6,6 +6,9 @@ import spacy
 from gensim.corpora import Dictionary
 from gensim.models import LdaMulticore
 from gensim.models.phrases import Phrases
+from scipy.sparse import csr_matrix
+from sklearn.decomposition import TruncatedSVD
+from sklearn.feature_extraction.text import TfidfVectorizer
 from tqdm import tqdm
 
 from .constants import BOW_COL, QUOTATION_COL, TOKENS_COL
@@ -195,3 +198,43 @@ def get_lda_model(df: pd.DataFrame, dictionary: Dictionary) -> LdaMulticore:
         id2word=dictionary,
         random_state=0
     )
+
+
+def get_tfidf_matrix(
+    df: pd.DataFrame,
+    text_col: str = QUOTATION_COL,
+    vocabulary: list = None,
+) -> csr_matrix:
+    """Returns the TF-IDF matrix from quotations.
+
+    Args:
+        df (pd.DataFrame): dataframe of quotes.
+        text_col (str, optional): name of the column. Defaults to 'quotation'.
+        vocabulary (list, optional): list of words to use. Defaults to None.
+
+    Returns:
+        csr_matrix: TF-IDF matrix.
+    """
+    tfidf_vectorizer = TfidfVectorizer(vocabulary=vocabulary)
+    tfidf_matrix = tfidf_vectorizer.fit_transform(df[text_col])
+    return tfidf_matrix
+
+
+def reduce_tfidf_matrix(
+    tfidf_matrix: csr_matrix,
+    n_components: int = 2,
+) -> tuple:
+    """Reduces the TF-IDF matrix using a dimensionality reduction procedure.
+
+    Args:
+        tfidf_matrix (csr_matrix): TF-IDF matrix.
+        n_components (int, optional): dimensionality of output. Defaults to 2.
+
+    Returns:
+        tuple: TF-IDF matrix reduced, explained variance ratio
+    """
+    truncatedSVD = TruncatedSVD(
+        n_components=n_components, n_iter=10, random_state=0,
+    )
+    tfidf_matrix_reduced = truncatedSVD.fit_transform(tfidf_matrix)
+    return tfidf_matrix_reduced, truncatedSVD.explained_variance_ratio_
