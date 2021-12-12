@@ -8,8 +8,8 @@ import os
 import pandas as pd
 from tqdm import tqdm
 
-from .constants import (QID_COL, QIDS_COL, QUOTATION_COL, SPEAKER_COL,
-                        TEST_DATA_PATH)
+from .constants import QID_COL, QIDS_COL, QUOTATION_COL, SPEAKER_COL
+from .paths import TEST_DATA_PATH
 
 pd.options.mode.chained_assignment = None
 
