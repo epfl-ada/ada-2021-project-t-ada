@@ -4,8 +4,11 @@ pyLDAvis
 googledrivedownloader
 matplotlib
 nltk
+numpy
 pandas
 plotly
+scikit-learn
+scipy
 spacy
 tqdm
 wordcloud
