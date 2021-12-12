@@ -22,6 +22,30 @@ nlp = spacy.load('en_core_web_sm')
 STOPWORDS = spacy.lang.en.stop_words.STOP_WORDS
 
 
+def clean_col_text(df: pd.DataFrame, text_col: str = QUOTATION_COL) -> None:
+    """Preprocesses a text column in a dataframe:
+
+    - Remove the line breaks
+    - Remove the punctuation
+    - Remove the capital letters
+
+    Args:
+        df (pd.DataFrame): dataframe.
+        text_col (str, optional): name of the column. Defaults to 'quotation'.
+    """
+    # Remove line breaks
+    df[text_col] = df[text_col].replace('\n', ' ')
+
+    # Remove numbers
+    df[text_col] = df[text_col].str.replace(r'\w*\d\w*', '', regex=True)
+
+    # Remove punctuation
+    df[text_col] = df[text_col].str.replace(r'[^\w\s]', '', regex=True)
+
+    # Remove capital letters
+    df[text_col] = df[text_col].str.lower()
+
+
 def get_tokens(text: str) -> list:
     """Preprocessing of a quote for LDA. It returns the list of tokens for the
     text after filtering.
