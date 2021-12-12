@@ -30,6 +30,7 @@ def create_df_from_bz2(filename: str) -> pd.DataFrame:
     data = list(map(json.loads, data))
     df = pd.DataFrame(data)
     df.set_index('quoteID', inplace=True)
+    assert df.index.is_unique  # check if index is unique
     return df
 
 

@@ -21,3 +21,60 @@ def drop_useless_columns(
         pd.DataFrame: dataframe with columns dropped.
     """
     return df.drop(colnames, axis=1)
+
+
+def remove_abnormalities(df: pd.DataFrame) -> pd.DataFrame:
+    """Preprocesses and checks any abnormalities in the data:
+
+    - Check and remove duplicated rows.
+    - Check presence of missing entries.
+
+    Args:
+        df (pd.DataFrame): dataframe.
+
+    Returns:
+        pd.DataFrame: dataframe with duplicates dropped.
+    """
+    # Remove duplicated rows
+    if not df.index.is_unique:
+        df.drop_duplicates(inplace=True)
+        print('Info: duplicated rows were removed')
+
+    # Check for missing entries anywhere in the dataframe
+    if df.isna().values.any():
+        print('Warning: presence of missing entries')
+
+    return df
+
+
+def convert_columns_type(
+    df: pd.DataFrame,
+    verbose: bool = False,
+) -> pd.DataFrame:
+    """Converts columns types.
+
+    Args:
+        df (pd.DataFrame): dataframe.
+        verbose (bool, optional): True to show old and new types.
+        Defaults to False.
+
+    Returns:
+        pd.DataFrame: dataframe with types converted.
+    """
+    # Print old types
+    if verbose:
+        print('Old types:')
+        print(df.dtypes)
+
+    # Change the types to the appropriate ones
+    df = df.convert_dtypes()
+
+    # Change type of date into datetime type
+    df['date'] = pd.to_datetime(df['date'])
+
+    # Print new types
+    if verbose:
+        print('\nNew types:')
+        print(df.dtypes)
+
+    return df
