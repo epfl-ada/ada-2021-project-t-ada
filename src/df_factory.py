@@ -129,3 +129,13 @@ def create_df_joined_quotes(df: pd.DataFrame) -> pd.DataFrame:
     return df.groupby(QID_COL, as_index=False)[QUOTATION_COL].progress_apply(
         lambda x: ' '.join(x)
     )
+
+
+def save_df_bz2(df: pd.DataFrame, filename: str) -> None:
+    """Saves a dataframe in a bz2 file.
+
+    Args:
+        df (pd.DataFrame): dataframe.
+        filename (str): bz2 file path.
+    """
+    df.to_json(filename, orient='records', lines=True, compression='bz2')
