@@ -3,6 +3,7 @@ Functions to create dataframes.
 """
 import bz2
 import json
+import os
 
 import pandas as pd
 from tqdm import tqdm
@@ -39,6 +40,26 @@ def create_df_test() -> pd.DataFrame:
         pd.DataFrame: test dataframe of quotes.
     """
     return create_df_from_bz2(TEST_DATA_PATH)
+
+
+def create_df_from_bz2_dir(dirname: str) -> pd.DataFrame:
+    """Creates a dataframe from a directory containing bz2 files.
+
+    Args:
+        dirname (str): path to the directory.
+
+    Returns:
+        pd.DataFrame: dataframe.
+    """
+    dfs = list()
+    filenames = os.listdir(dirname)
+    for filename in tqdm(filenames, desc='Load bz2 files', unit='file'):
+        path = os.path.join(dirname, filename)
+        df = create_df_from_bz2(path)
+        dfs.append(df)
+
+    # Concatenate the dataframes
+    return pd.concat(dfs)
 
 
 def create_df_speaker(df: pd.DataFrame, qid: str) -> pd.DataFrame:
