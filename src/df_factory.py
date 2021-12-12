@@ -8,7 +8,8 @@ import os
 import pandas as pd
 from tqdm import tqdm
 
-from .constants import QID_COL, QUOTATION_COL, TEST_DATA_PATH
+from .constants import (QID_COL, QIDS_COL, QUOTATION_COL, SPEAKER_COL,
+                        TEST_DATA_PATH)
 
 pd.options.mode.chained_assignment = None
 
@@ -61,6 +62,28 @@ def create_df_from_bz2_dir(dirname: str) -> pd.DataFrame:
 
     # Concatenate the dataframes
     return pd.concat(dfs)
+
+
+def create_df_unique_speakers(df: pd.DataFrame) -> pd.DataFrame:
+    """Creates a dataframe containing the quotations of the identified speakers
+    only.
+
+    Args:
+        df (pd.DataFrame): dataframe of quotes.
+
+    Returns:
+        pd.DataFrame: dataframe with one speaker per quote.
+    """
+    # Keep rows different of 'None' speaker
+    df_unique_speakers = df[df[SPEAKER_COL] != 'None']
+
+    # Add QID column
+    add_col_qid(df_unique_speakers)
+
+    # Drop QIDS column
+    df_unique_speakers.drop(QIDS_COL, axis=1, inplace=True)
+
+    return df_unique_speakers
 
 
 def create_df_speaker(df: pd.DataFrame, qid: str) -> pd.DataFrame:

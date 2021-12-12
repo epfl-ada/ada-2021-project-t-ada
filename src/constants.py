@@ -13,6 +13,7 @@ TEST_DATA_PATH = os.path.join(ROOT_DIR, 'data', TEST_FILENAME)
 BOW_COL = 'bow'
 COMPOUND_SCORE_COL = 'compound_score'
 QID_COL = 'qid'
+QIDS_COL = 'qids'
 QUOTATION_COL = 'quotation'
 SPEAKER_COL = 'speaker'
 TOKENS_COL = 'tokens'
