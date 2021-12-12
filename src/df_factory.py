@@ -15,18 +15,30 @@ pd.options.mode.chained_assignment = None
 tqdm.pandas()
 
 
+def create_df_from_bz2(filename: str) -> pd.DataFrame:
+    """Creates a dataframe from a bz2 file.
+
+    Args:
+        filename (str): path to the bz2 file.
+
+    Returns:
+        pd.DataFrame: dataframe.
+    """
+    with bz2.open(filename, 'rb') as f:
+        data = f.readlines()
+    data = list(map(json.loads, data))
+    df = pd.DataFrame(data)
+    df.set_index('quoteID', inplace=True)
+    return df
+
+
 def create_df_test() -> pd.DataFrame:
     """Creates the dataframe from the test dataset of quotes from the NYT.
 
     Returns:
         pd.DataFrame: test dataframe of quotes.
     """
-    with bz2.open(TEST_DATA_PATH, 'rb') as f:
-        data = f.readlines()
-        data = list(map(json.loads, data))
-    df = pd.DataFrame(data)
-    df.set_index('quoteID', inplace=True)
-    return df
+    return create_df_from_bz2(TEST_DATA_PATH)
 
 
 def create_df_speaker(df: pd.DataFrame, qid: str) -> pd.DataFrame:
