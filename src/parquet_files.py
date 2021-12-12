@@ -36,7 +36,9 @@ def get_number_speakers_several_parties(df: pd.DataFrame) -> int:
     Returns:
         int: number of speakers affiliated to several parties.
     """
-    mask = df.party.progress_apply(lambda x: len(x) > 1)
+    mask = df.party.progress_apply(
+        lambda x: len(x) > 1 if x is not None else 0
+    )
     return df[mask].shape[0]
 
 
@@ -46,7 +48,9 @@ def affiliate_speakers_last_party(df: pd.DataFrame) -> None:
     Args:
         df (pd.DataFrame): dataframe of speakers.
     """
-    df.party = df.party.progress_apply(lambda x: x[-1] if len(x) > 1 else x)
+    df['party'] = df['party'].progress_apply(
+        lambda x: x[-1] if x is not None else x
+    )
 
 
 def create_df_us_party(df: pd.DataFrame) -> pd.DataFrame:
