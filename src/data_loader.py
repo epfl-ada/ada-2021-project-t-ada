@@ -5,7 +5,7 @@ import os
 
 from google_drive_downloader import GoogleDriveDownloader as gdd
 
-from .constants import TEST_DATA_PATH, TEST_FILENAME
+from .paths import TEST_DATA_PATH, TEST_FILENAME
 
 
 def download_test_data() -> None:
