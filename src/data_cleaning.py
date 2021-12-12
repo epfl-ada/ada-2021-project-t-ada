@@ -17,7 +17,8 @@ def drop_useless_columns(
         colnames (list, optional): names of columns to remove.
         Defaults to USELESS_COLS.
     """
-    df.drop(colnames, axis=1, inplace=True)
+    if all(col in df.columns for col in USELESS_COLS):
+        df.drop(colnames, axis=1, inplace=True)
 
 
 def remove_abnormalities(df: pd.DataFrame) -> None:
