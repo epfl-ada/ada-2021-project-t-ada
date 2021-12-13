@@ -4,7 +4,7 @@ Functions to create wordclouds.
 import matplotlib.pyplot as plt
 import pandas as pd
 from tqdm import tqdm
-from wordcloud import WordCloud, STOPWORDS
+from wordcloud import STOPWORDS, WordCloud
 
 from .constants import TOKENS_COL
 
