@@ -30,7 +30,8 @@ def create_df_from_bz2(filename: str) -> pd.DataFrame:
         data = f.readlines()
     data = list(map(json.loads, data))
     df = pd.DataFrame(data)
-    df.set_index('quoteID', inplace=True)
+    if 'quoteID' in df.columns:
+        df.set_index('quoteID', inplace=True)
     assert df.index.is_unique  # check if index is unique
     return df
 
@@ -139,3 +140,18 @@ def save_df_bz2(df: pd.DataFrame, filename: str) -> None:
         filename (str): bz2 file path.
     """
     df.to_json(filename, orient='records', lines=True, compression='bz2')
+
+
+def add_col_tokens_from_bz2(df: pd.DataFrame, filename: str) -> pd.DataFrame:
+    """Adds the column of tokens to a dataframe of quotes from a filename
+    containing the tokens.
+
+    Args:
+        df (pd.DataFrame): dataframe.
+        filename (str): bz2 file with the tokens.
+
+    Returns:
+        pd.Dataframe: dataframe with tokens column.
+    """
+    df_tokens = create_df_from_bz2(filename)
+    return df.merge(df_tokens, how='left', left_index=True, right_index=True)
