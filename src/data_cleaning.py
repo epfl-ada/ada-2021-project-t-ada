@@ -62,7 +62,8 @@ def convert_columns_type(df: pd.DataFrame, verbose: bool = False) -> None:
     df = df.convert_dtypes()
 
     # Change type of date into datetime type
-    df['date'] = pd.to_datetime(df['date'])
+    if 'date' in df.columns:
+        df['date'] = pd.to_datetime(df['date'])
 
     # Print new types
     if verbose:
