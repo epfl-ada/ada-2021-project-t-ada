@@ -12,7 +12,8 @@ from sklearn.decomposition import TruncatedSVD
 from sklearn.feature_extraction.text import TfidfVectorizer
 from tqdm import tqdm
 
-from .constants import BOW_COL, QUOTATION_COL, TOKENS_COL
+from .constants import (BOW_COL, QUOTATION_COL, TOKENS_COL, TOPICS_COL,
+                        TOPICS_DICT)
 
 pd.options.mode.chained_assignment = None
 
@@ -260,3 +261,59 @@ def reduce_tfidf_matrix(
     )
     tfidf_matrix_reduced = truncatedSVD.fit_transform(tfidf_matrix)
     return tfidf_matrix_reduced, truncatedSVD.explained_variance_ratio_
+
+
+def create_lexicon(topics_dict: dict = TOPICS_DICT, size: int = 500) -> Empath:
+    """Creates a lexicon with empath from a dictionary of topics and seed
+    words.
+
+    Args:
+        topics_dict (dict, optional): dictionary of topics and seed words.
+        Defaults to TOPICS_DICT.
+        size (int, optional): number of generated words. Defaults to 500.
+
+    Returns:
+        Empath: lexicon.
+    """
+    lexicon = Empath()
+    for topic_name, seed_words in topics_dict.items():
+        print('Topic:', topic_name)
+        lexicon.create_category(
+            topic_name, seed_words, model='nytimes', size=size
+        )
+    return lexicon
+
+
+def get_topics_list(tokens: list, lexicon: Empath, categories: list) -> list:
+    """Returns the list of topics from a list of tokens and a lexicon.
+
+    Args:
+        tokens (list): tokens list.
+        lexicon (Empath): lexicon.
+        categories (list): list of topics.
+
+    Returns:
+        list: list of topics.
+    """
+    result = lexicon.analyze(tokens, categories=categories)
+    return [topic for topic in result if result[topic] > 0]
+
+
+def add_topics_col(
+    df: pd.DataFrame,
+    lexicon: Empath,
+    categories: list,
+) -> None:
+    """Adds the column of topics to a dataframe of quotes. It corresponds to
+    a list of topics about a quote.
+
+    Args:
+        df (pd.DataFrame): dataframe with `tokens` column.
+        lexicon (Empath): lexicon from Empath.
+        categories (list): list of topics.
+    """
+    assert TOKENS_COL in df.columns
+
+    df[TOPICS_COL] = df[TOKENS_COL].progress_apply(
+        lambda x: get_topics_list(x, lexicon, categories)
+    )

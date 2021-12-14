@@ -9,6 +9,7 @@ QIDS_COL = 'qids'
 QUOTATION_COL = 'quotation'
 SPEAKER_COL = 'speaker'
 TOKENS_COL = 'tokens'
+TOPICS_COL = 'topics'
 
 # Useless columns
 USELESS_COLS = ['phase', 'probas', 'urls']
