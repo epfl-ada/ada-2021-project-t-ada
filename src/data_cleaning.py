@@ -21,7 +21,7 @@ def drop_useless_columns(
         df.drop(colnames, axis=1, inplace=True)
 
 
-def remove_abnormalities(df: pd.DataFrame) -> None:
+def remove_abnormalities(df: pd.DataFrame, verbose: bool = False) -> None:
     """Preprocesses and checks any abnormalities in the data:
 
     - Check and remove duplicated rows.
@@ -29,15 +29,20 @@ def remove_abnormalities(df: pd.DataFrame) -> None:
 
     Args:
         df (pd.DataFrame): dataframe.
+        verbose (bool, optional): True to show messages. Defaults to False.
     """
     # Remove duplicated rows
     if not df.index.is_unique:
         df.drop_duplicates(inplace=True)
         print('Info: duplicated rows were removed')
+    elif verbose:
+        print('No duplicated rows')
 
     # Check for missing entries anywhere in the dataframe
     if df.isna().values.any():
         print('Warning: presence of missing entries')
+    elif verbose:
+        print('No missing entries')
 
 
 def convert_columns_type(df: pd.DataFrame, verbose: bool = False) -> None:
