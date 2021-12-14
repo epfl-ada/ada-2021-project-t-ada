@@ -11,5 +11,6 @@ plotly
 scikit-learn
 scipy
 spacy
+tabulate
 tqdm
 wordcloud
