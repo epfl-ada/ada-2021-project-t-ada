@@ -25,6 +25,14 @@ QID = {
     'republican': 'Q29468',
 }
 
+# List of parties
+PARTIES_LIST = [
+    'democratic party',
+    'republican party',
+    'other party',
+    'no party',
+]
+
 # Dictionnary of topics and seed terms
 TOPICS_DICT = {
     'immigration': [
