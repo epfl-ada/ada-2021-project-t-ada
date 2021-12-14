@@ -11,7 +11,7 @@ SPEAKER_COL = 'speaker'
 TOKENS_COL = 'tokens'
 
 # Useless columns
-USELESS_COLS = ['phase', 'probas']
+USELESS_COLS = ['phase', 'probas', 'urls']
 
 # Columns to keep in parquet files
 SPEAKER_COLUMNS = [
