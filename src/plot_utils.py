@@ -4,6 +4,8 @@ Plot functions using plotly.
 import pandas as pd
 import plotly.express as px
 
+from .constants import COMPOUND_SCORE_COL
+
 
 def plot_bar_top_speakers(
     df: pd.DataFrame,
@@ -82,6 +84,7 @@ def plot_pie_parties(
         filename (str, optional): filename to save the figure.
         Defaults to None.
     """
+    assert 'party_name' in df.columns
 
     df_parties = df['party_name'].value_counts().reset_index()
     df_parties.columns = ['party', 'counts']
@@ -93,6 +96,37 @@ def plot_pie_parties(
         title=title,
     )
     fig.update_traces(textinfo='percent+label')
+
+    if filename is not None:
+        fig.write_html(filename)
+
+    return fig
+
+
+def plot_hist_compound(
+    df: pd.DataFrame,
+    title: str = 'Distribution of compound score',
+    filename: str = None,
+):
+    """Plots the distribution of the compound score in a dataframe.
+
+    Args:
+        df (pd.DataFrame): dataframe of quotes.
+        title (str, optional): title.
+        Defaults to 'Distribution of compound score'.
+        filename (str, optional): filename to save the figure.
+        Defaults to None.
+    """
+    assert COMPOUND_SCORE_COL in df.columns
+
+    fig = px.histogram(
+        df, x=COMPOUND_SCORE_COL, nbins=20,
+        labels={
+            COMPOUND_SCORE_COL: 'Compound score',
+            'count': 'Number of quotations'
+        },
+        title=title,
+    )
 
     if filename is not None:
         fig.write_html(filename)
