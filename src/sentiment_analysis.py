@@ -20,6 +20,18 @@ nltk.download('vader_lexicon')
 sia = SentimentIntensityAnalyzer()
 
 
+def get_polarity_scores(text) -> dict:
+    """Returns the polarity scores for a quotation.
+
+    Args:
+        text (str): text or quotation.
+
+    Returns:
+        dict: polarity scores (compound, neg, neu, pos).
+    """
+    return sia.polarity_scores(text)
+
+
 def get_compound_score(text: str) -> float:
     """Returns the compound score for a quotation.
 
@@ -29,7 +41,7 @@ def get_compound_score(text: str) -> float:
     Returns:
         float: compound score.
     """
-    return sia.polarity_scores(text)['compound']
+    return get_polarity_scores(text)['compound']
 
 
 def add_col_compound_score(df: pd.DataFrame,
