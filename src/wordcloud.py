@@ -37,7 +37,7 @@ def join_tokens(df: pd.DataFrame) -> str:
     Returns:
         str: joined tokens.
     """
-    return ' '.join(''.join(tokens) for tokens in df[TOKENS_COL])
+    return ' '.join(' '.join(tokens) for tokens in df[TOKENS_COL])
 
 
 def plot_wordcloud(
