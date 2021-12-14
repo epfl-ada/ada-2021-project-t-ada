@@ -2,8 +2,12 @@
 Functions to clean data.
 """
 import pandas as pd
+from tqdm import tqdm
 
-from .constants import USELESS_COLS
+from .constants import TOKENS_COL, USELESS_COLS
+
+# Init progress bar
+tqdm.pandas()
 
 
 def drop_useless_columns(
@@ -69,3 +73,13 @@ def convert_columns_type(df: pd.DataFrame, verbose: bool = False) -> None:
     if verbose:
         print('\nNew types:')
         print(df.dtypes)
+
+
+def drop_pron_tokens(df: pd.DataFrame) -> None:
+    """Drops the -PRON- from the tokens column of a dataframe.
+
+    Args:
+        df (pd.DataFrame): dataframe.
+    """
+    df[TOKENS_COL] = df[TOKENS_COL].progress_apply(
+        lambda x: [token for token in x if token != '-PRON-'])
