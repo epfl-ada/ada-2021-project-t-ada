@@ -4,6 +4,7 @@ All constants.
 # Column names in dataframes
 BOW_COL = 'bow'
 COMPOUND_SCORE_COL = 'compound_score'
+PARTY_NAME_COL = 'party_name'
 QID_COL = 'qid'
 QIDS_COL = 'qids'
 QUOTATION_COL = 'quotation'
