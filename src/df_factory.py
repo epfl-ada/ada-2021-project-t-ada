@@ -62,7 +62,12 @@ def create_df_from_bz2_dir(dirname: str) -> pd.DataFrame:
         dfs.append(df)
 
     # Concatenate the dataframes
-    return pd.concat(dfs)
+    df_concat = pd.concat(dfs)
+
+    # Sort index
+    df_concat.sort_index(inplace=True)
+
+    return df_concat
 
 
 def create_df_unique_speakers(df: pd.DataFrame) -> pd.DataFrame:
