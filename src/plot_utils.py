@@ -132,3 +132,36 @@ def plot_hist_compound(
         fig.write_html(filename)
 
     return fig
+
+
+def plot_scatter_pca(
+    df: pd.DataFrame,
+    title: str = 'PCA',
+    filename: str = None,
+):
+    """Plots the results of a PCA from a dataframe.
+
+    Args:
+        df (pd.DataFrame): dataframe of PCA.
+        title (str, optional): title. Defaults to 'PCA'.
+        filename (str, optional): filename to save the figure.
+        Defaults to None.
+    """
+    if df.columns.size == 3:
+        # 3 components
+        fig = px.scatter_3d(
+            df.reset_index(), x='PC1', y='PC2', z='PC3', color='party_name',
+            hover_data=['label'], title=title,
+        )
+        fig.update_traces(marker=dict(size=3))
+    else:
+        # 2 components
+        fig = px.scatter(
+            df.reset_index(), x='PC1', y='PC2', color='party_name',
+            hover_data=['label'], title=title,
+        )
+
+    if filename is not None:
+        fig.write_html(filename)
+
+    return fig
