@@ -1,6 +1,7 @@
 """
 Text processing functions.
 """
+import numpy as np
 import pandas as pd
 import spacy
 from empath import Empath
@@ -12,8 +13,8 @@ from sklearn.decomposition import TruncatedSVD
 from sklearn.feature_extraction.text import TfidfVectorizer
 from tqdm import tqdm
 
-from .constants import (BOW_COL, QUOTATION_COL, TOKENS_COL, TOPICS_COL,
-                        TOPICS_DICT)
+from .constants import (BOW_COL, COMPOUND_SCORE_COL, QUOTATION_COL, TOKENS_COL,
+                        TOPICS_COL, TOPICS_DICT)
 
 pd.options.mode.chained_assignment = None
 
@@ -317,3 +318,34 @@ def add_topics_col(
     df[TOPICS_COL] = df[TOKENS_COL].progress_apply(
         lambda x: get_topics_list(x, lexicon, categories)
     )
+
+
+def create_df_topics(df: pd.DataFrame, categories: list) -> pd.DataFrame:
+    """Creates the dataframe of topics from a dataframe of quotes.
+
+    It contains one column per topic, one row per quote. The cell for quote q
+    and topic t contains the compound score if t is in the topics associated to
+    the quote, Nan otherwise.
+
+    Args:
+        df (pd.DataFrame): dataframe of quotes.
+        categories (list): list of topics.
+
+    Returns:
+        pd.DataFrame: dataframe of topics.
+    """
+    assert COMPOUND_SCORE_COL in df.columns and TOPICS_COL in df.columns
+
+    # Init dataframe
+    df_topics = pd.DataFrame()
+
+    # Create each column
+    for topic in tqdm(categories, desc='Create df topics', unit='topic'):
+        colname = f"{topic.replace(' ', '_')}_{COMPOUND_SCORE_COL}"
+        df_topics[colname] = df.apply(
+            lambda x: x[COMPOUND_SCORE_COL] if topic in x[TOPICS_COL]
+            else np.nan,
+            axis=1
+        )
+
+    return df_topics
