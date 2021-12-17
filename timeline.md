@@ -20,16 +20,7 @@
 | Write the Data Story on the possible extension of the project. | 14/12 ↓ 15/12 | JUANICO Alice
 | Write the README. | 13/12 ↓ 16/12 | DESCHAMPS Quentin, TESTA Laura
 | Complete and perfect the Data Story. | 14/12   ↓ 16/12 | ALBRECHT Alice
-| Check everything, rerun the entire code, reread the documentation (Jupyter notebook, Readme, Data Story), coherence in the visualization, etc. | 17/12 | ALL
-
-
-| Name           | Tasks                                         
-| ---------------| :------------------------------------------- 
-| Quentin Deschamps |
-| Laura Testa       |
-| Alice Juanico     | - Create a dictionary for every topic using Empath, use them to filter our data to check if there are enough quotations per topics
-- Test 2
-| Alice Albrecht    |                                          
+| Check everything, rerun the entire code, reread the documentation (Jupyter notebook, Readme, Data Story), coherence in the visualization, etc. | 17/12 | ALL                                      
 
 
 ## Gantt chart
