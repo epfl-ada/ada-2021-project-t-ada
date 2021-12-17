@@ -44,9 +44,9 @@ In the USA, the political orientation of American people is mostly divided into 
 ### Research questions
 
 Our project should answer the following questions:
-•	Who are the main speakers quoted in the newspapers and from what political party are they?
-•	What is the opinion of newspapers on big subjects and debated topics? Are these opinions drifting towards one political party?
-•	Are there any specific topics that are frequently addressed by newspapers? Are those topics relevant to define the newspapers' political opinion?
+- Who are the main speakers quoted in the newspapers and from what political party are they?
+- What is the opinion of newspapers on big subjects and debated topics? Are these opinions drifting towards one political party?
+- Are there any specific topics that are frequently addressed by newspapers? Are those topics relevant to define the newspapers' political opinion?
 
 ### Additional datasets
 
@@ -55,17 +55,18 @@ The parquet provided from the ADA course containing additional information on sp
 ### Methods
 
 The determination of the political orientation of the journals is based on several chosen topics that are commonly addressed in the USA and on which republicans and democrats tend to argue. Therefore, we chose mulitple topics and use Empath to generate a dictionnary from given seed terms. The dictionaries will help to select quotations that comment on a specific topic. Here is the exhaustive list of reviewed topics:
-  •	immigration
-  •	healthcare
-  •	climate
-  •	trump
-  •	abortion
-  •	women right
-  •	violence
-  •	racism
-  •	war
-  •	tax
-  •	coal
+- immigration
+- healthcare
+- climate
+- trump
+- abortion
+- women right
+- violence
+- racism
+- war
+- tax
+- coal
+
 Then for each journal:
 1. Determine who are the main speakers and the proportion given by the journal to each party 
 2. Perform a sentiment analysis on each of the selected quotations to obtain a quote score vector for the selected set of topics
