@@ -95,8 +95,6 @@ Alice Albrecht:
 -	Create a dictionary for every topic using Empath, use them to filter our data to check if there are enough quotations per topics  
 -	README and harmonization of the documentations
 
-See [timeline](timeline.md).
-
 ## References
 
 See [references](references.md)
