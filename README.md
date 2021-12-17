@@ -76,6 +76,25 @@ Then for each journal:
 
 ### Organization
 
+Quentin Deschamps: 
+-	Creation of the GitHub website
+-	Perform sentiment analysis on the whole data using the different dictionaries, in order to score all the quotes per topic, obtaining a score vector per quotation.
+-	Improved code writing and final organization of the GitHub
+
+Alice Juanico: 
+-	For each party, compute from the set of quotations scores a mean score vector to determine the opinion (positive, negative, neutral) of the party on each topic. Check if the score distributions are statistically different between both parties (statistical analysis)
+-	Visualization coding part to obtain the interactive graphs for the website
+
+Laura Testa: 
+-	Preprocessing of the data and Tokenizer to obtain analyzable quotes
+-	Perform a PCA to visualize the differences of opinion between Democrats and Republicans (using the sentiment analysis results)
+-	Writing the data story for the website and handle the presentation
+
+Alice Albrecht: 
+-	Loading the complete data for the 3 journals 
+-	Create a dictionary for every topic using Empath, use them to filter our data to check if there are enough quotations per topics  
+-	README and harmonization of the documentations
+
 See [timeline](timeline.md).
 
 ## References
