@@ -3,8 +3,10 @@ Plot functions using plotly.
 """
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
+import matplotlib
 
-from .constants import COMPOUND_SCORE_COL
+from .constants import COMPOUND_SCORE_COL, TOPICS
 
 
 def plot_bar_top_speakers(
@@ -160,6 +162,144 @@ def plot_scatter_pca(
             df.reset_index(), x='PC1', y='PC2', color='party_name',
             hover_data=['label'], title=title,
         )
+
+    if filename is not None:
+        fig.write_html(filename)
+
+    return fig
+
+def plot_mean_sentiment_scores_per_party(
+    df: pd.DataFrame,
+    title: str = 'Mean score per topic for the sentiment analysis', 
+    filename: str = None,
+):
+    """Plots the results of the sentiment analysis, showing the difference of 
+    opinion score per political party. 
+    
+    Args:
+        df (pd.DataFrame): dataframe of sentiment analysis scores.
+        title (str, optional): title. Defaults to 'Mean score per topic for the sentiment analysis'.
+        filename (str, optional): filename to save the figure. Defaults to None.
+    """
+    # Compute mean and std per party
+    means_per_party = df.groupby('party_name').mean()
+    std_per_party = df.groupby('party_name').std()
+
+    # Create figure
+    fig = go.Figure()
+    # Add trace for democrats scores
+    fig.add_trace(go.Bar(
+                name='Democrats',
+                x=TOPICS, y=means_per_party.loc["democratic party"],
+                error_y=dict(type='data', array=std_per_party.loc["democratic party"].values)
+            ))
+    # Add trace for republican scores
+    fig.add_trace(go.Bar(
+                name='Republicans',
+                x=TOPICS, y=means_per_party.loc["republican party"],
+                error_y=dict(type='data', array=std_per_party.loc["republican party"].values)
+            ))
+
+    # Update the figure layouts and plot
+    fig.update_layout(barmode='group', title=title,
+        yaxis_title='Mean score', xaxis_title='Topics')
+
+    if filename is not None:
+        fig.write_html(filename)
+
+    return fig
+
+
+def dropdown_menu_for_plot(df:pd.DataFrame):
+    """ Function creates an interactive dropdown menu for a bar plot with all the topics
+    of the sentiment analysis. 
+    Returns the dropdiwn variables and the corresponding data to be plotted.
+    
+    Args:
+        df (pd.DataFrame): dataframe of sentiment analysis scores.
+    """
+    # Initialize variables
+    buttons_list = list([])
+    plotted_data = []
+    i = 0
+
+    # Define the colors for the graph
+    c_map = matplotlib.cm.get_cmap(name='tab20', lut=11)
+    color_list = [matplotlib.colors.rgb2hex(c_map(i)) for i in range(c_map.N)]
+    
+    for topic in TOPICS:
+        # Data to be plotted
+        plotted_data.append(go.Bar(
+            name=topic,
+            x=df.index.astype('string'), y=df[topic+'_compound_score'], 
+            marker_color=color_list[i]
+            ))
+
+        # Interactive button
+        x_visible = len(TOPICS)*[False]
+        x_visible[i] = True
+        buttons_list.append(dict(label=topic, 
+                        method = 'update', 
+                        args=[{'visible': x_visible},
+                        {'title': 'Count of {}-related quotes over the years'.format(topic)}])
+                    )
+        i+=1
+    
+    return plotted_data, buttons_list
+
+def plot_topics_count_stacked(
+    df:pd.DataFrame, 
+    journal_name:str = 'NYT', 
+    filename: str = None
+    ):
+    """ Plots the count of quotes for each topic for a given dataframe. 
+        
+        Args:
+        df (pd.DataFrame): dataframe of quotes count per topic over the years.
+        journal_name (str, optional): name of the journal. Defaults to 'NYT'.
+        filename (str, optional): filename to save the figure. Defaults to None.
+        """
+    
+    [plotted_data, buttons_list] = dropdown_menu_for_plot(df)
+    
+    # Create graph layout
+    menus = list( [dict(active=-1,buttons=buttons_list)] )
+    layout = dict(barmode='stack', title='Count of topic-related quotes over the years ({})'.format(journal_name), showlegend=False,
+               yaxis_title='Normalized count', xaxis_title='Years', updatemenus=menus)
+    # Plot the graph
+    fig = go.Figure(data=plotted_data, layout=layout)
+ 
+    if filename is not None:
+        fig.write_html(filename)
+    
+    return fig
+
+def plot_topics_R_vs_D(
+    df_democrats:pd.DataFrame,
+    df_republicans: pd.DataFrame,
+    topic: str, 
+    filename: str = None
+    ):
+    """Plots the count of quotes over the years for Republicans and Democrats (bar chart), for a specific topic.
+        
+        Args: 
+        df_democrats (pd.DataFrame): dataframe of democrat speakers quotes count per topic over the years.
+        df_republicans (pd.DataFrame): dataframe of republicans speakers quotes count per topic over the years.
+        topic (str): name of the topic to plot.
+        filename (str, optional): filename to save the figure. Defaults to None.
+    """
+    fig = go.Figure()
+    fig.add_trace(go.Bar( 
+        name='Democrats',
+        x=df_democrats.index.astype('string'), y=df_democrats[topic+'_compound_score']
+        ))
+    fig.add_trace(go.Bar( 
+        name='Republicans',
+        x=df_republicans.index.astype('string'), y=df_republicans[topic+'_compound_score']
+        ))
+
+    fig.update_layout(barmode='stack', title='Count of {}-related quotes over the years (R vs D)'.format(topic),
+        yaxis_title='Normalized count', xaxis_title='Years')
 
     if filename is not None:
         fig.write_html(filename)

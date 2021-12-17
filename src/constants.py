@@ -160,3 +160,16 @@ TOPICS_DICT = {
         'carbon',
     ],
 }
+
+# Topics names
+TOPICS = ['immigration',
+        'healthcare',
+        'climate',
+        'trump',
+        'abortion',
+        'women_right',
+        'violence',
+        'racism',
+        'war',
+        'tax',
+        'coal']
