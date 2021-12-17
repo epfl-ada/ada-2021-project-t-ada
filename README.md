@@ -46,7 +46,7 @@ For this project, we use the [Quotebank](https://doi.org/10.5281/zenodo.4277311)
 ### Research questions
 
 Our project answers the following questions:
-- Who are the main speakers quoted in the newspapers and from what political party are they?
+- Who are the main speakers quoted in the newspapers and from which political party are they?
 - What is the opinion of newspapers on big subjects and debated topics? Are these opinions drifting towards one political party?
 - Are there any specific topics that are frequently addressed by newspapers? Are those topics relevant to define the newspapers' political opinion?
 
@@ -86,6 +86,7 @@ Quentin Deschamps:
 Alice Juanico:
 - For each party, compute from the set of quotations scores a mean score vector to determine the opinion (positive, negative, neutral) of the party on each topic. Check if the score distributions are statistically different between both parties (statistical analysis)
 - Visualization coding part to obtain the interactive graphs for the website
+- Improved the data story about interactive graph
 
 Laura Testa:
 - Preprocessing of the data and tokenizer to obtain analyzable quotes
