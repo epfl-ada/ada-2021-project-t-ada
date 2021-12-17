@@ -1,8 +1,30 @@
-# Determining the political orientation of the New York Times newspaper through quotes analysis
-Albrecht Alice, Deschamps Quentin, Juanico Alice, Testa Laura
+# Determining the political orientation of newspapers through quotes analysis
 
+## Team members
 
-*Note: the code for milestone 2 is divided into two notebooks: `project_pt1_loading.ipynb` and `project_pt2_analyses.ipynb`. This choice is explained in the first notebook.*
+- Albrecht Alice
+- Deschamps Quentin
+- Juanico Alice
+- Testa Laura
+
+## Structure of the repository
+
+The analysis is divided into two notebooks:
+
+- `project_pt1_loading.ipynb`: loading and selecting the data
+- `project_pt2_analyses.ipynb`: analyses
+
+All the functions used in the notebooks are implemented in the `src` directory,
+which contains multiple modules for the different tasks of the analysis.
+
+## Setup
+
+We used [Google Colab](https://research.google.com/colaboratory/) to run the
+notebooks. The different libraries used are listed in the `requirements.txt`
+file and can be downloaded with the following command:
+```
+pip3 install -r requirements.txt
+```
 
 ### Abstract:
 In the USA, the political orientation of American people is mostly divided into two main parties: the republicans and the democrats. The famous New York Times newspaper claims to be neutral, presenting both democratic and republican opinions. Here, we will use the quotebank dataset containing a set of quotations published in the newspapers between 2015 and 2020 to verify this statement. Using different techniques such as sentiment analysis and Principal Component Analysis, we will highlight the separation between pro-democratic and pro-republican in the quotations and their speakers and check whether one political orientation is more strongly represented than the other one. The determination of the political orientation will be based on sentiment analysis about several chosen topics that are commonly addressed in the USA and on which republicans and democrats tend to argue.
