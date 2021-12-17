@@ -74,3 +74,11 @@ Further steps to perform for the project:
 - Conclude if one political party is more strongly represented in the NYT, using the political network.
 
 Used libraries (for now): `spaCy`, `NLTK`, `WordCloud`, `Pandas`, `NumPy`, `Matplotlib`
+
+### Organization
+
+See [timeline](timeline.md).
+
+## References
+
+See [references](references.md)
