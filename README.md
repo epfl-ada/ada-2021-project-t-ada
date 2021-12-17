@@ -74,8 +74,6 @@ Then for each journal:
 4. Analyze the mean sentiment score per topic of the entire journal
 5. PCA visualization for speakers quotes: visualize the difference of opinions between the 2 parties
 
-Used libraries (for now): `spaCy`, `NLTK`, `WordCloud`, `Pandas`, `NumPy`, `Matplotlib`
-
 ### Organization
 
 See [timeline](timeline.md).
