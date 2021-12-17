@@ -2,6 +2,8 @@
 Determining the political orientation of newspapers through quotes analysis
 </h1>
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4277311.svg)](https://doi.org/10.5281/zenodo.4277311)
+
 ## Team members
 
 - Albrecht Alice
